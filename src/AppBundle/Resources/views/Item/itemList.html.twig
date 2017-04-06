@@ -1,0 +1,56 @@
+{% if folder.accessible(app.user) %}
+    {% include 'AppBundle:Folder:folderName.html.twig' %}
+    {% if folder.parent is empty %}
+        <a href="{{ path('createSubFolder',{'id':folder.id}) }}" class="btn btn-primary"><span
+                    class="glyphicon glyphicon-plus"></span>
+            {{ 'create_folder'|trans }}</a>
+    {% endif %}
+    <a href="{{ path('createItem',{'folderId':folder.id}) }}" class="btn btn-info"><span
+                class="glyphicon glyphicon-plus"></span> {{ 'add_item'|trans }}</a><br><br>
+    <table class="table table-striped">
+        {% for item in folder.items %}
+            <tr>
+                <td width="45%"><h4>{{ item.name }}</h4>
+                    <p>{{ item.description }}</p></td>
+                <td width="45%">
+                    <p><a href="{{ item.loginUrl }}" target="_blank">{{ item.loginUrl }}</a></p>
+                    <p>{{ item.login }}</p>
+                    <p>
+                    <p class="load_pass" hidden="hidden">{{ 'load_pass'|trans }}</p>
+                    <p class="copy_pass" hidden="hidden">{{ 'copy_pass'|trans }}</p>
+                    <p class="show_pass" hidden="hidden">{{ 'show_pass'|trans }}</p>
+                    <p class="hide" hidden="hidden">{{ 'hide'|trans }}</p>
+                    <button href="{{ path('item_detail', {'id': item.id}) }}"
+                            class="btn btn-sm btn-default copy-password">{{ 'load_pass'|trans }}
+                    </button>
+                    <button href="{{ path('item_detail', {'id': item.id}) }}"
+                            class="btn btn-sm btn-default password-value">{{ 'show_pass'|trans }}
+                    </button>
+                    <br>
+                    </p>
+                <td width="10%">
+                    <a class="btn btn-warning" href="{{ path('editItem', {'itemId': item.id,'folderId': folder.id}) }}"
+                       type="submit">
+                        <span class="glyphicon glyphicon-edit"></span>
+                    </a>
+                    <br><a class="btn btn-info"
+                           href="{{ path('logs', {'id': item.id}) }}"
+                           type="submit">
+                        <span class="glyphicon glyphicon-list"></span>
+                    </a><br>
+                    <a class="btn btn-danger delete-item"
+                       href="{{ path('deleteItem', {'itemId': item.id, 'folderId': folder.id, 'token':csrf_token('token')}) }}"
+                       type="submit">
+                        <span class="glyphicon glyphicon-remove"></span>
+                    </a>
+                </td>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td width="100%" colspan="5">{{ 'no_items'|trans }}</td>
+            </tr>
+        {% endfor %}
+
+    </table>
+{% endif %}

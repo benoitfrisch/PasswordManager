@@ -1,0 +1,18 @@
+services:
+    admin.user:
+        class: AppBundle\Admin\UserAdmin
+        arguments: [~, AppBundle\Entity\User, ~]
+        calls:
+            - [setUserManager, ['@fos_user.user_manager.default']]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: User List, group: Administration }
+    admin.group:
+        class: AppBundle\Admin\GroupAdmin
+        arguments: [~, AppBundle\Entity\Group, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: Group List, group: Administration }
+    app.form.type.groups:
+            class: AppBundle\Form\Type\GroupType
+            arguments: ['@doctrine.orm.entity_manager']
+            tags:
+                - { name: form.type }

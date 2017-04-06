@@ -1,0 +1,113 @@
+{% extends 'MopaBootstrapBundle::base_less.html.twig' %}
+
+{% block head_style %}
+    {% stylesheets
+    '@MopaBootstrapBundle/Resources/public/less/mopabootstrapbundle.less'
+    filter='lessphp' %}
+    <link href="{{ asset_url }}" type="text/css" rel="stylesheet" media="screen"/>
+    {% endstylesheets %}
+{% endblock head_style %}
+
+{% block body_tag %}
+<body data-spy="scroll" data-target="#navbar-example">
+{% endblock body_tag %}
+
+{% block head_script %}
+    {% javascripts
+    '@AppBundle/Resources/public/js/libs/jquery.min.js'
+    '@MopaBootstrapBundle/Resources/public/bootstrap/js/tooltip.js'
+    '@MopaBootstrapBundle/Resources/public/bootstrap/js/*.js'
+    '@MopaBootstrapBundle/Resources/public/js/mopabootstrap-collection.js'
+    '@MopaBootstrapBundle/Resources/public/js/mopabootstrap-subnav.js'
+    '@AppBundle/Resources/public/js/main.js'
+    '@AppBundle/Resources/public/js/libs/clipboard.min.js' %}
+    <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+{% endblock head_script %}
+
+
+{% block navbar %}
+
+    {% embed '@MopaBootstrap/Navbar/navbar.html.twig' with { fixedTop: true, staticTop: false, fixedBottom: false, staticBottom: false, inverse: true, id: mainTop } %}
+        {% block brand %}
+            <a class="navbar-brand" href="{{ path('folders_list') }}">Password Manager</a>
+        {% endblock %}
+
+        {% block menu %}
+            {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                {{ mopa_bootstrap_menu('AppBundle:Builder:mainMenu', {'automenu': 'navbar'}) }}
+                {% if is_granted("ROLE_ADMIN") %}
+                    <ul class="nav navbar-nav">
+                        <li>
+                            <a href="{{ path('sonata_admin_dashboard') }}" target="_blank">Admin</a>
+                        </li>
+                    </ul>
+                {% endif %}
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ app.request.getLocale()|upper }} <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="{{ path('home', {'_locale': 'fr'}) }}">FR</a></li>
+                            <li><a href="{{ path('home', {'_locale': 'de'}) }}">DE</a></li>
+                            <li><a href="{{ path('home', {'_locale': 'en'}) }}">EN</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#">{{ 'logged'|trans }} {{ app.user.firstname }} {{ app.user.lastname }}</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('fos_user_security_logout') }}">{{ 'layout.logout'|trans({}, 'FOSUserBundle') }}</a>
+                    </li>
+                </ul>
+
+            {% else %}
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="{{ path('fos_user_security_login') }}">{{ 'layout.login'|trans({}, 'FOSUserBundle') }}</a>
+                    </li>
+                </ul>
+            {% endif %}
+        {% endblock %}
+    {% endembed %}
+{% endblock navbar %}
+
+{% block body %}
+    {{ parent() }}
+{% endblock body %}
+{% block page_header %}
+    <br><br><br><br>
+{% endblock page_header %}
+
+{% block content_row %}
+    <div class="row">
+        {% block content %}
+            <div class="col-sm-3">
+                {% block content_sidebar %}
+                {% endblock content_sidebar %}
+            </div>
+            <div class="col-sm-9">
+                {% block content_content %}
+                {% endblock content_content %}
+            </div>
+        {% endblock content %}
+    </div>
+{% endblock content_row %}
+
+{% block footer %}
+
+{% endblock footer %}
+
+{% block foot_script %}
+{% javascripts
+'@MopaBootstrapBundle/Resources/public/js/mopabootstrap-collection.js'
+'@MopaBootstrapBundle/Resources/public/js/mopabootstrap-subnav.js' %}
+<script type="text/javascript" src="{{ asset_url }}"></script>
+{% endjavascripts %}
+{{ parent() }}
+
+{% javascripts
+'@MopaBootstrapBundle/Resources/public/components/smalot-bootstrap-datetimepicker/js/bootstrap-datetimepicker.js'
+'@MopaBootstrapBundle/Resources/public/components/smalot-bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.fr.js' %}
+<script type="text/javascript" src="{{ asset_url }}"></script>
+{% endjavascripts %}
+{% endblock foot_script %}

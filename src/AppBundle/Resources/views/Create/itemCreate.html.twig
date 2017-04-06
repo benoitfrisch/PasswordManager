@@ -1,0 +1,15 @@
+{% extends 'AppBundle::base.html.twig' %}
+
+{% block title %}
+    {{ folder.name }}
+{% endblock title %}
+{% block content_sidebar %}
+    {% include 'AppBundle:Folder:foldersSidebar.html.twig' %}
+{% endblock content_sidebar %}
+
+{% block content_content %}
+    {% include 'AppBundle:Folder:folderName.html.twig' %}
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+    {{ form_end(form) }}
+{% endblock content_content %}

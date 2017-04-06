@@ -1,0 +1,22 @@
+menu.home: Accueil
+menu.create: Créer dossier
+menu.hidden: Dossiers invisibles
+create_folder: Créer nouveau dossier
+logged: Connecté en tant que
+load_pass: Charger le mot de passe
+copy_pass: Copier le mot de passe
+show_pass: Afficher le mot de passe
+create_folder: Créer un sous-dossier
+add_item: Ajouter un élément
+no_hidden: Pas de dossiers invisibles trouvés.
+no_items: Pas d'éléments dans le dossier.
+name: Nom
+hidden: Invisible
+groups: Groupes
+description: Description
+login_url: Lien Login
+username: Nom d'utilisateur
+password: Mot de passe
+hide: Cacher
+deleted: Supprimé!
+not_deleted: Ce dossier ne pas être supprimé car il a des éléments.

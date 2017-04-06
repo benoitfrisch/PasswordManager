@@ -1,0 +1,66 @@
+{% extends 'AppBundle::base.html.twig' %}
+
+{% block title %}
+    {{ folder.name }}
+{% endblock title %}
+{% block content_sidebar %}
+    {% include 'AppBundle:Folder:foldersSidebar.html.twig' %}
+{% endblock content_sidebar %}
+
+{% block content_content %}
+    {% include 'AppBundle:Folder:folderName.html.twig' %}
+    {% if folder.parent is empty %}
+        <a href="{{ path('createSubFolder',{'id':folder.id}) }}" class="btn btn-primary"><span
+                    class="glyphicon glyphicon-plus"></span>
+            {{ 'create_folder'|trans }}</a>
+    {% endif %}
+    <a href="{{ path('createItem',{'folderId':folder.id}) }}" class="btn btn-info"><span
+                class="glyphicon glyphicon-plus"></span> {{ 'add_item'|trans }}</a><br><br>
+    <table class="table table-striped">
+        <tr>
+            <td width="45%"><h4>{{ item.name }}</h4>
+                <p>{{ item.description }}</p></td>
+            <td width="45%">
+                <p><a href="{{ item.loginUrl }}" target="_blank">{{ item.loginUrl }}</a></p>
+                <p>{{ item.login }}</p>
+                <p>
+                    <button href="{{ path('item_detail', {'id': item.id}) }}"
+                            class="btn btn-sm btn-default copy-password">Load password
+                    </button>
+                    <button href="{{ path('item_detail', {'id': item.id}) }}"
+                            class="btn btn-sm btn-default password-value">Show password
+                    </button>
+                    <br>
+                </p>
+            <td width="10%">
+                <a class="btn btn-warning" href="{{ path('editItem', {'itemId': item.id,'folderId': folder.id}) }}"
+                   type="submit">
+                    <span class="glyphicon glyphicon-edit"></span>
+                </a>
+                <br>
+                <a class="btn btn-danger delete-item"
+                   href="{{ path('deleteItem', {'itemId': item.id, 'folderId': folder.id, 'token':csrf_token('token')}) }}"
+                   type="submit">
+                    <span class="glyphicon glyphicon-remove"></span>
+                </a>
+            </td>
+        </tr>
+    </table>
+    <h3>Access Logs</h3>
+    <table class="table table-striped">
+        {% for log in item.logs|reverse %}
+
+            <tr>
+                <td width="33%">
+                    <p>{{ log.timestamp|date('d.m.Y H:i:s') }}</p>
+                </td>
+                <td width="33%">
+                    <p>{{ log.user.firstname }} {{ log.user.lastname }} ({{ log.user.username }})</p>
+                </td>
+                <td width="33%">
+                    <p>{{ log.ip }}</p>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+{% endblock content_content %}

@@ -1,0 +1,9 @@
+<h3>{{ folder.name }}
+    <a href="{{ path('editFolder',{'id':folder.id}) }}" class="btn btn-warning">
+        <span class="glyphicon glyphicon-edit"></span></a>
+    <a class="btn btn-danger delete-item"
+       href="{{ path('deleteFolder', {'itemId': item.id, 'folderId': folder.id, 'token':csrf_token('token')}) }}"
+       type="submit">
+        <span class="glyphicon glyphicon-remove"></span>
+    </a>
+</h3>

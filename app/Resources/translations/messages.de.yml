@@ -1,0 +1,22 @@
+menu.home: Home
+menu.create: Ordner erstellen
+menu.hidden: Unsichtbare Ordner
+create_folder: Neuen Ordner erstellen
+logged: Eingeloggt als
+load_pass: Passwort laden
+copy_pass: Passwort kopieren
+show_pass: Passwort anzeigen
+create_folder: Neuen unter Ordner erstellen
+add_item: Element hinzufügen
+no_hidden: Keine unsichtbare Ordner.
+no_items: Keine Elemente.
+name: Name
+hidden: Unsichtbar
+groups: Gruppen
+description: Beschreibung
+login_url: Login URL
+username: Benutzername
+password: Passwort
+hide: Verstecken
+deleted: Gelöscht!
+not_deleted: Konnte nicht gelöscht werden, da dieser Ordner Elemente enthält.

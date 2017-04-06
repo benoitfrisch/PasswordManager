@@ -1,0 +1,10 @@
+{% extends "@User/layout.html.twig" %}
+{% block title %}
+    Login
+{% endblock title %}
+{% block headline %}
+    Login
+{% endblock headline %}
+{% block fos_user_content %}
+    {{ include('@User/Security/login_content.html.twig') }}
+{% endblock fos_user_content %}

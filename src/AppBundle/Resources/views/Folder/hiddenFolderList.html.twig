@@ -1,0 +1,15 @@
+{% extends 'AppBundle::base.html.twig' %}
+
+{% block title %}
+    Hidden Folders
+{% endblock title %}
+{% block content_content %}
+    <h3>{{ 'menu.hidden'|trans }}</h3>
+    <div class="list-group">
+        {% for folder in folders if folder.accessible(app.user) %}
+            <a class="list-group-item" href="{{ path('item',{'id':folder.id}) }}">{{ folder.name }}</a>
+        {% else %}
+            <p>{{ 'no_hidden'|trans }}</p>
+        {% endfor %}
+    </div>
+{% endblock %}

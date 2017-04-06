@@ -1,0 +1,7 @@
+<a href="{{ path('createFolder') }}" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> {{ 'create_folder'|trans }}</a>
+<br><br>
+<div class="list-group">
+    {% for folder in folders if folder.accessible(app.user) %}
+        <a class="list-group-item" href="{{ path('item',{'id':folder.id}) }}">{{ folder.name }}</a>
+    {% endfor %}
+</div>

@@ -1,0 +1,22 @@
+menu.home: Home
+menu.create: Create folder
+menu.hidden: Hidden folders
+create_folder: Create new Folder
+logged: Logged in as
+load_pass: Load password
+copy_pass: Copy password
+show_pass: Show password
+create_folder: Create new sub Folder
+add_item: Add item
+no_hidden: No Hidden folders available.
+no_items: No items found.
+name: Name
+hidden: Hidden
+groups: Groups
+description: Description
+login_url: Login URL
+username: Username
+password: Password
+hide: Hide
+deleted: Deleted!
+not_deleted: Cannot be deleted. Delete sub items first.
