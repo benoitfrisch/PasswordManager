@@ -47,3 +47,5 @@ http://symfony.com/doc/current/cookbook/configuration/web_server_configuration.h
 http://symfony.com/doc/current/deployment.html
 
 You can access the application from the URL you installed it on.
+
+Go to User Interface at `/admin and create groups. Then attribute groups to a user.
