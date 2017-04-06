@@ -22,7 +22,7 @@ this command anywhere in your system:
 
 ```bash
 $ git clone https://github.com/benoitfrisch/PasswordManager.git
-$ cd password-manager
+$ cd PasswordManager
 ```
 You have to install [composer](https://getcomposer.org/download/) on your computer if you don't have it already.
 
@@ -48,4 +48,4 @@ http://symfony.com/doc/current/deployment.html
 
 You can access the application from the URL you installed it on.
 
-Go to User Interface at `/admin and create groups. Then attribute groups to a user.
+Go to User Interface at `/admin` and create groups. Then attribute groups to a user.
