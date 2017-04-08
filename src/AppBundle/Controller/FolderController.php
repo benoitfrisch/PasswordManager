@@ -8,12 +8,16 @@ use AppBundle\Form\FolderType;
 use AppBundle\Form\ItemType;
 use Doctrine\DBAL\Exception\ForeignKeyConstraintViolationException;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
+/**
+ * @Security("is_granted('IS_AUTHENTICATED_FULLY')")
+ */
 class FolderController extends Controller
 {
     /**
@@ -32,7 +36,7 @@ class FolderController extends Controller
 
     /**
      * This lists all main Folders which are hidden. Sorting by name.
-     * @Route("/hidden_list", name ="hiddenFolders")
+     * @Route("/manager/hidden_list", name ="hiddenFolders")
      * @Template
      */
     public function hiddenFolderListAction()

@@ -8,6 +8,7 @@ use AppBundle\Entity\Log;
 use AppBundle\Form\FolderType;
 use AppBundle\Form\ItemType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 
 use Symfony\Component\HttpFoundation\Request;
@@ -16,6 +17,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\Validator\Constraints\DateTime;
 
+/**
+ * @Security("is_granted('IS_AUTHENTICATED_FULLY')")
+ */
 class DefaultController extends Controller
 {
     public function redirectAction(Request $request)
