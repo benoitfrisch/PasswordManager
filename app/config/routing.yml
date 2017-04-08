@@ -1,26 +1,24 @@
-# These first lines load the all routes defined as @Route() annotations in any
-# controller defined inside the src/AppBundle/Controller/ directory. Controllers
-# are loaded recursively, so you can separate them into subdirectories.
-# If you don't like to add annotations in your applications, you can also define
-# the routes in YAML, XML or PHP files.
-# See http://symfony.com/doc/current/book/routing.html
 root:
    path: /
    defaults:
        _controller: AppBundle:Default:redirect
+
 app:
     resource: '@AppBundle/Controller/'
     type:     annotation
-    prefix:   /{_locale}/
+    prefix:   /{_locale}
     requirements:
-      _locale: %app_locales%
+        _locale: %app_locales%
+
 fos_user_security:
     resource: "@FOSUserBundle/Resources/config/routing/security.xml"
+
 admin_area:
     resource: "@SonataAdminBundle/Resources/config/routing/sonata_admin.xml"
     prefix: /{_locale}/admin
     requirements:
-          _locale: %app_locales%
+        _locale: %app_locales%
+
 _sonata_admin:
     resource: .
     type: sonata_admin
