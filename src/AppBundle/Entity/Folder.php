@@ -1,14 +1,15 @@
 <?php
+
 namespace AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\AdvancedUserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
-use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity()
  * @ORM\Table(name="folders")
  */
-
 class Folder
 {
     /**
@@ -75,8 +76,27 @@ class Folder
         return $this;
     }
 
-    public function isAccessible(AdvancedUserInterface $user) {
+    public function isAccessible(AdvancedUserInterface $user)
+    {
         return !empty(array_intersect($user->getGroups()->getValues(), $this->getGroups()->getValues()));
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getGroups()
+    {
+        return $this->groups;
+    }
+
+    /**
+     * @param mixed $groups
+     * @return Folder
+     */
+    public function setGroups($groups)
+    {
+        $this->groups = $groups;
+        return $this;
     }
 
     /**
@@ -106,14 +126,6 @@ class Folder
     }
 
     /**
-     * @return mixed
-     */
-    public function getItemsCount()
-    {
-        return count($this->items);
-    }
-
-    /**
      * @param mixed $items
      * @return Folder
      */
@@ -121,6 +133,14 @@ class Folder
     {
         $this->items = $items;
         return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getItemsCount()
+    {
+        return count($this->items);
     }
 
     /**
@@ -140,7 +160,6 @@ class Folder
         $this->hidden = $hidden;
         return $this;
     }
-
 
     /**
      * @return mixed
@@ -175,24 +194,6 @@ class Folder
     public function setParent($parent)
     {
         $this->parent = $parent;
-        return $this;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getGroups()
-    {
-        return $this->groups;
-    }
-
-    /**
-     * @param mixed $groups
-     * @return Folder
-     */
-    public function setGroups($groups)
-    {
-        $this->groups = $groups;
         return $this;
     }
 }

@@ -22,6 +22,18 @@ class UserAdmin extends AbstractAdmin
         $this->userManager = $userManager;
     }
 
+    public function prePersist($object)
+    {
+        $this->userManager->updatePassword($object);
+        $this->userManager->updateCanonicalFields($object);
+    }
+
+    public function preUpdate($object)
+    {
+        $this->userManager->updatePassword($object);
+        $this->userManager->updateCanonicalFields($object);
+    }
+
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper->add('firstname');
@@ -48,18 +60,6 @@ class UserAdmin extends AbstractAdmin
                 'edit' => [],
             ]
         ]);
-    }
-
-    public function prePersist($object)
-    {
-        $this->userManager->updatePassword($object);
-        $this->userManager->updateCanonicalFields($object);
-    }
-
-    public function preUpdate($object)
-    {
-        $this->userManager->updatePassword($object);
-        $this->userManager->updateCanonicalFields($object);
     }
 
 

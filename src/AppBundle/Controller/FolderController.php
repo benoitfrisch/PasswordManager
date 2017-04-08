@@ -3,9 +3,7 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Folder;
-use AppBundle\Entity\Item;
 use AppBundle\Form\FolderType;
-use AppBundle\Form\ItemType;
 use Doctrine\DBAL\Exception\ForeignKeyConstraintViolationException;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
@@ -22,7 +20,8 @@ class FolderController extends Controller
 {
     /**
      * This lists all main Folders which are not hidden. Sorting by name.
-     * @Route("/manager", name ="folders_list")
+     *
+     * @Route("/manager", name="folders_list")
      * @Template
      */
     public function folderListAction()
@@ -36,7 +35,8 @@ class FolderController extends Controller
 
     /**
      * This lists all main Folders which are hidden. Sorting by name.
-     * @Route("/manager/hidden_list", name ="hiddenFolders")
+     *
+     * @Route("/manager/hidden_list", name="hiddenFolders")
      * @Template
      */
     public function hiddenFolderListAction()
@@ -95,7 +95,7 @@ class FolderController extends Controller
      *
      * Matches /manager/createFolder/*
      *
-     * @Route("/manager/createFolder/{id}", name ="createSubFolder",requirements={"id": "\d+"})
+     * @Route("/manager/createFolder/{id}", name="createSubFolder",requirements={"id": "\d+"})
      * @Template
      * @param Request $request
      * @param $id
@@ -133,7 +133,8 @@ class FolderController extends Controller
 
     /**
      * This deletes a folder (folderID). CSRF protection with (token)
-     * @Route("/manager/{folderId}/delete/{token}", name ="deleteFolder" ,requirements={"itemId": "\d+"})
+     *
+     * @Route("/manager/{folderId}/delete/{token}", name="deleteFolder" ,requirements={"itemId": "\d+"})
      * @param Request $request
      * @param $folderId
      * @param $token
