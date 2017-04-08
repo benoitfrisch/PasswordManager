@@ -1,26 +1,9 @@
-# This is the main configuration file of your application. It stores all the
-# common options for every execution environment ('prod', 'dev', 'test').
-
-# To avoid creating configuration files that are too long, we first import some
-# files that define the values for important parts of the Symfony application,
-# such as the security component and the dependency injection services
 imports:
     - { resource: parameters.yml }
     - { resource: services.yml }
 
 # Basic configuration for the Symfony framework features
 framework:
-    # The 'ide' option turns all of the file paths in an exception page
-    # into clickable links that open the given file using your favorite IDE.
-    # Supported values are 'phpstorm', 'sublime', 'textmate', 'macvim' and 'emacs'.
-    # When 'ide' is set to null the file is opened in your web browser.
-    # See http://symfony.com/doc/current/reference/configuration/framework.html#ide
-    ide: ~
-
-    # When using the HTTP Cache, ESI allows to render page fragments separately
-    # and with different cache configurations for each fragment
-    # http://symfony.com/doc/current/book/http_cache.html#edge-side-includes
-    esi:             { enabled: true }
     translator:      { fallback: "%locale%" }
     secret:          "%env(SYMFONY_SECRET)%"
     router:
@@ -39,13 +22,12 @@ framework:
         handler_id:  session.handler.native_file
         save_path:   "%kernel.root_dir%/../var/sessions/%kernel.environment%"
     fragments:       ~
-    http_method_override: true
+    http_method_override: false
     assets: ~
 
 # Doctrine Configuration (used to access databases and manipulate their information)
 doctrine:
     dbal:
-        # instead of using a URL, you may also uncomment the following lines to configure your database
          driver:   pdo_mysql
          host:     "%database_host%"
          port:     "%database_port%"
@@ -59,11 +41,6 @@ doctrine:
         auto_mapping: true
 
 # Swiftmailer Configuration (used to send emails)
-# instead of configuring the mailer credentials in this file, we pull
-# them from the app/config/parameters.yml file. The reason is that config.yml
-# stores options that change the application behavior and parameters.yml
-# stores options that change from one server to another
-#
 swiftmailer:
     transport: "%mailer_transport%"
     host:      "%mailer_host%"
@@ -72,22 +49,17 @@ swiftmailer:
     spool:     { type: memory }
 
 knp_menu:
-    # use "twig: false" to disable the Twig extension and the TwigRenderer
     twig:
         template: KnpMenuBundle::menu.html.twig
-    #  if true, enables the helper for PHP templates
     templating: false
-    # the renderer to use, list is also available by default
     default_renderer: twig
 
 mopa_bootstrap:
-    form:
-            ~
-    menu:
-            ~
+    form: ~
+    menu: ~
 
 fos_user:
-    db_driver: orm # other valid values are 'mongodb', 'couchdb' and 'propel'
+    db_driver: orm
     firewall_name: main
     user_class: AppBundle\Entity\User
     from_email:
@@ -102,12 +74,12 @@ assetic:
         cssrewrite: ~
         lessphp:
            file: "%kernel.root_dir%/../vendor/oyejorge/less.php/lessc.inc.php"
+
 sonata_block:
     default_contexts: [cms]
     blocks:
-        # enable the SonataAdminBundle block
         sonata.admin.block.admin_list:
             contexts: [admin]
-        # ...
+
 sonata_admin:
-    title:                'Admin'
+    title: 'Admin'

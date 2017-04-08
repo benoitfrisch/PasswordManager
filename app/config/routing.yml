@@ -8,7 +8,7 @@ app:
     type:     annotation
     prefix:   /{_locale}
     requirements:
-        _locale: %app_locales%
+        _locale: %routing_languages%
 
 fos_user_security:
     resource: "@FOSUserBundle/Resources/config/routing/security.xml"
@@ -17,7 +17,7 @@ admin_area:
     resource: "@SonataAdminBundle/Resources/config/routing/sonata_admin.xml"
     prefix: /{_locale}/admin
     requirements:
-        _locale: %app_locales%
+        _locale: %routing_languages%
 
 _sonata_admin:
     resource: .
