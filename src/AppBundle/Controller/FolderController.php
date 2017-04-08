@@ -36,7 +36,7 @@ class FolderController extends Controller
 
     /**
      * This lists all main Folders which are hidden. Sorting by name.
-     * @Route("/hidden_list", name ="hiddenFolders")
+     * @Route("/manager/hidden_list", name ="hiddenFolders")
      * @Template
      */
     public function hiddenFolderListAction()
