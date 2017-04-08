@@ -1,59 +1,39 @@
 <?php
 
-/*
- * This file is part of the Symfony package.
- *
- * (c) Fabien Potencier <fabien@symfony.com>
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- */
-
 namespace Tests\AppBundle\Controller;
 
-use AppBundle\Entity\Post;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
-use Symfony\Component\BrowserKit\Cookie;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
+use Tests\AppBundle\DatabasePrimer;
 
-/**
- * Functional test that implements a "smoke test" of all the public and secure
- * URLs of the application.
- * See http://symfony.com/doc/current/best_practices/tests.html#functional-tests.
- *
- * Execute the application tests using this command (requires PHPUnit to be installed):
- *
- *     $ cd your-symfony-project/
- *     $ ./vendor/bin/phpunit
- */
 class DefaultControllerTest extends WebTestCase
 {
     public function setUp()
     {
+        self::bootKernel();
 
+        DatabasePrimer::prime(self::$kernel);
     }
 
     /**
      * @dataProvider urlProvider
      */
-    public function testPageIsSuccessful($url)
+    public function testLoginIsSuccessful($url)
     {
         $client = $this->getClient($url);
 
-        $this->assertSame($client->getResponse()->getStatusCode(), 200);
+        $response = $client->getResponse();
+        $crawler = $client->getCrawler();
+
+        $this->assertSame($response->getStatusCode(), 200);
+        $this->assertGreaterThan(0, $crawler->filter('a:contains("Create new Folder")')->count());
     }
 
     public function urlProvider()
     {
-        return array(
-            array('/manager'),
-            array('/login'),
-            // ...
-        );
+        return [
+            ['/en/manager'],
+        ];
     }
-
-    private $client = null;
 
     /**
      * @param $url
@@ -68,9 +48,9 @@ class DefaultControllerTest extends WebTestCase
 
         $form = $crawler->selectButton('Log in')->form();
 
-        // set some values
-        $form['_username'] = '';
-        $form['_password'] = '';
+        // Set username and password
+        $form['_username'] = 'test';
+        $form['_password'] = 'demo';
 
         $client->submit($form);
         return $client;
