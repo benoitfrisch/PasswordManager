@@ -7,6 +7,7 @@ parameters:
     languages: [en, de, fr]
     routing_languages: “(en|de|fr)”
     locale: fr
+    app_locales: en|fr|de
 
     # The 'secret' value is a random string of characters used by Symfony to
     # to add more entropy to security related operations.
