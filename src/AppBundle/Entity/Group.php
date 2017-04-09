@@ -1,9 +1,9 @@
 <?php
+
 namespace AppBundle\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\ORM\Mapping as ORM;
 use FOS\UserBundle\Model\Group as BaseGroup;
 
 /**
@@ -40,6 +40,12 @@ class Group extends BaseGroup
      * @ORM\ManyToMany(targetEntity="User", mappedBy="groups")
      */
     protected $users;
+
+    public function __construct()
+    {
+        $this->items = new ArrayCollection();
+        $this->users = new ArrayCollection();
+    }
 
     public function __toString()
     {
@@ -120,12 +126,6 @@ class Group extends BaseGroup
     {
         $this->folders = $folders;
         return $this;
-    }
-
-    public function __construct()
-    {
-        $this->items = new ArrayCollection();
-        $this->users = new ArrayCollection();
     }
 
 }

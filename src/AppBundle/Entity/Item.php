@@ -1,9 +1,10 @@
 <?php
+
 namespace AppBundle\Entity;
 
-use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity()
@@ -11,6 +12,11 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Item
 {
+    /**
+     * @ORM\OneToMany(targetEntity="Log", mappedBy="item", cascade={"persist", "remove"})
+     */
+    protected $logs;
+
     /**
      * @var int
      *
@@ -67,10 +73,10 @@ class Item
      */
     private $groups;
 
-    /**
-     * @ORM\OneToMany(targetEntity="Log", mappedBy="item", cascade={"persist", "remove"})
-     */
-    protected $logs;
+    public function __construct()
+    {
+        $this->groups = new ArrayCollection();
+    }
 
     /**
      * @return mixed
@@ -90,7 +96,6 @@ class Item
         return $this;
     }
 
-
     /**
      * @return mixed
      */
@@ -108,7 +113,6 @@ class Item
         $this->name = $name;
         return $this;
     }
-
 
     /**
      * @return mixed
@@ -185,24 +189,6 @@ class Item
     /**
      * @return mixed
      */
-    public function getVisibility()
-    {
-        return $this->visibility;
-    }
-
-    /**
-     * @param mixed $visibility
-     * @return Item
-     */
-    public function setVisibility($visibility)
-    {
-        $this->visibility = $visibility;
-        return $this;
-    }
-
-    /**
-     * @return mixed
-     */
     public function getFolder()
     {
         return $this->folder;
@@ -252,11 +238,6 @@ class Item
     {
         $this->logs = $logs;
         return $this;
-    }
-
-    public function __construct()
-    {
-        $this->groups = new ArrayCollection();
     }
 
 

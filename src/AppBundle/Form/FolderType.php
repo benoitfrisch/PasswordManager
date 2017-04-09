@@ -2,16 +2,13 @@
 
 namespace AppBundle\Form;
 
-use AppBundle\Entity\User;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class FolderType extends AbstractType
 {
-
-
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         if (count($options['parent']) > 0) {
@@ -20,9 +17,9 @@ class FolderType extends AbstractType
             $groups = $options['user'];
         }
         $builder
-            ->add('name', null, ['label'=>'name'])
-            ->add('hidden', null, ['required' => true, 'label'=>'hidden'])
-            ->add('groups', null, ['choices' => $groups, 'expanded' => true, 'required' => true, 'label'=>'groups'])
+            ->add('name', null, ['label' => 'name'])
+            ->add('hidden', null, ['required' => true, 'label' => 'hidden'])
+            ->add('groups', null, ['choices' => $groups, 'expanded' => true, 'required' => true, 'label' => 'groups'])
             ->add('save', SubmitType::class, ['label' => 'create_folder']);
     }
 

@@ -1,6 +1,5 @@
 $(function () {
     var $body = $('body');
-    var $load_pass = $('.load_pass').text();
     var $copy_pass = $('.copy_pass').text();
     var $show_pass = $('.show_pass').text();
     var $hide = $('.hide').text();

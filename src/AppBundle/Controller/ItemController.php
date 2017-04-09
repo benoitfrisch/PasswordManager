@@ -2,12 +2,9 @@
 
 namespace AppBundle\Controller;
 
-use AppBundle\Entity\Folder;
 use AppBundle\Entity\Item;
 use AppBundle\Entity\Log;
-use AppBundle\Form\FolderType;
 use AppBundle\Form\ItemType;
-use Doctrine\DBAL\Exception\ForeignKeyConstraintViolationException;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
@@ -23,7 +20,8 @@ class ItemController extends Controller
 {
     /**
      * Lists items in a specific folder (id)
-     * @Route("/manager/{id}", name ="item",requirements={"id": "\d+"})
+     *
+     * @Route("/manager/{id}", name="item", requirements={"id": "\d+"})
      * @Template
      * @param $id
      * @return array
@@ -41,7 +39,8 @@ class ItemController extends Controller
 
     /**
      * Lists logs for an item.
-     * @Route("/manager/item/log/{id}", name ="logs")
+     *
+     * @Route("/manager/item/log/{id}", name="logs")
      * @Template
      * @param $id
      * @return array
@@ -60,7 +59,8 @@ class ItemController extends Controller
 
     /**
      * Retrieve a password an update logs.
-     * @Route("/manager/item/{id}", name ="item_detail",requirements={"id": "\d+"})
+     *
+     * @Route("/manager/item/{id}", name="item_detail", requirements={"id": "\d+"})
      * @param Request $request
      * @param $id
      * @return Response
@@ -81,7 +81,6 @@ class ItemController extends Controller
             $em->persist($log);
             $em->flush();
             return new Response($item->getValue());
-
         } else {
             throw new AccessDeniedException();
         }
@@ -89,8 +88,9 @@ class ItemController extends Controller
 
     /**
      * This creates an item.
-     * @Route("/manager/create/{folderId}", name ="createItem",requirements={"folderId": "\d+"})
-     * @Route("/manager/{folderId}/edit/{itemId}", name ="editItem")
+     *
+     * @Route("/manager/create/{folderId}", name="createItem", requirements={"folderId": "\d+"})
+     * @Route("/manager/{folderId}/edit/{itemId}", name="editItem")
      * @Template
      * @param Request $request
      * @param null $folderId
@@ -137,7 +137,8 @@ class ItemController extends Controller
 
     /**
      * This deletes an item.
-     * @Route("/manager/{folderId}/delete/{itemId}/{token}", name ="deleteItem" ,requirements={"itemId": "\d+"})
+     *
+     * @Route("/manager/{folderId}/delete/{itemId}/{token}", name="deleteItem", requirements={"itemId": "\d+"})
      * @param Request $request
      * @param $itemId
      * @param $token
